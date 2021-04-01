@@ -9,7 +9,6 @@ pipelines:
    - name: sendNotification
      type: Bash
      configuration:
-      environmentVariables:
       inputResources:
         - name: artifact_arrived
           trigger: true
