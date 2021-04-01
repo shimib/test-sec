@@ -1,0 +1,18 @@
+resources:
+  - name: artifact_arrived
+    type: IncomingWebhook
+    configuration:
+      webhookName: artifact_to_scan
+pipelines:
+ - name: scan_artifact
+   steps:
+   - name: sendNotification
+     type: Bash
+     configuration:
+      environmentVariables:
+      inputResources:
+        - name: artifact_arrived
+          trigger: true
+     execution:
+      onStart:
+        - send_notification shimiNotify "artifact has arrived"
