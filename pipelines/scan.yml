@@ -14,4 +14,14 @@ pipelines:
           trigger: true
      execution:
       onStart:
-        - send_notification shimiNotify "artifact has arrived"
+        - echo "send_notification shimiNotify \"artifact has arrived\""
+   - name: download_jar_in_secluded_repo
+     type: Bash
+     execution:
+      onStart:
+        - POM=echo $res_artifact_arrived_payload | jq -c '.data.path' 
+        - JAR="${POM%.pom}.jar"
+        - jfrog rt curl -XHEAD /quar_maven/${JAR}
+
+
+     
