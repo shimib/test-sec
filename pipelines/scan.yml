@@ -15,13 +15,6 @@ pipelines:
      execution:
       onStart:
         - echo "send_notification shimiNotify \"artifact has arrived\""
-   - name: download_jar_in_secluded_repo
-     type: Bash
-     configuration:
-             inputSteps:
-                     - name: sendNotification
-     execution:
-      onStart:
         - echo "$res_artifact_arrived_payload"
         - POM=`echo $res_artifact_arrived_payload | jq -c '.data.path'` 
         - echo "$POM"
