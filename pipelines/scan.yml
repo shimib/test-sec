@@ -26,7 +26,7 @@ pipelines:
         - echo "$POM"
         - JAR="${POM%.pom}.jar"
         - echo "$JAR"
-        - jfrog rt curl -XHEAD /quar_maven/${JAR} -v
+        - jfrog rt curl --head /quar_maven/${JAR} -v
 
 
      
