@@ -13,7 +13,7 @@ pipelines:
         - name: artifact_arrived
           trigger: true
       integrations:
-        - name: ArtifactoryUnified
+        - name: ArtifactorySaaS
      execution:
       onStart:
         - >-
