@@ -12,8 +12,14 @@ pipelines:
       inputResources:
         - name: artifact_arrived
           trigger: true
+      integrations:
+        - name: ArtifactoryUnified
      execution:
       onStart:
+        - >-
+          retry_command jfrog rt config --url $int_ArtifactoryUnified_url --user
+          $int_ArtifactoryUnified_user --apikey $int_ArtifactoryUnified_apikey
+          --interactive=false
         - echo "send_notification shimiNotify \"artifact has arrived\""
         - echo "$res_artifact_arrived_payload"
         - POM=`echo $res_artifact_arrived_payload | jq -r -c '.data.path'` 
