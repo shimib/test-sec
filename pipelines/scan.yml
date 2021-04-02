@@ -22,7 +22,9 @@ pipelines:
                      - name: sendNotification
      execution:
       onStart:
+        - echo "$res_artifact_arrived_payload"
         - POM=`echo $res_artifact_arrived_payload | jq -c '.data.path'` 
+        - echo "$POM"
         - JAR="${POM%.pom}.jar"
         - echo "$JAR"
         - jfrog rt curl -XHEAD /quar_maven/${JAR}
