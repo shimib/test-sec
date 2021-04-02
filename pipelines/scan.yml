@@ -24,6 +24,7 @@ pipelines:
       onStart:
         - POM=`echo $res_artifact_arrived_payload | jq -c '.data.path'` 
         - JAR="${POM%.pom}.jar"
+        - echo "$JAR"
         - jfrog rt curl -XHEAD /quar_maven/${JAR}
 
 
