@@ -16,7 +16,7 @@ pipelines:
       onStart:
         - echo "send_notification shimiNotify \"artifact has arrived\""
         - echo "$res_artifact_arrived_payload"
-        - POM=`echo $res_artifact_arrived_payload | jq -c '.data.path'` 
+        - POM=`echo $res_artifact_arrived_payload | jq -r -c '.data.path'` 
         - echo "$POM"
         - JAR="${POM%.pom}.jar"
         - echo "$JAR"
