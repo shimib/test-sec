@@ -15,7 +15,7 @@ pipelines:
       integrations:
         - name: ArtifactorySaaS
      execution:
-      onStart:
+      onExecute:
         - POM=`echo $res_artifact_info_payload | jq -r -c '.name'` 
         - >-
           retry_command jfrog rt config --url $int_ArtifactorySaaS_url --user
@@ -24,7 +24,7 @@ pipelines:
         - echo "send_notification shimiNotify \"received request to clear $POM \""
         - jfrog rt curl /maven-wellsfargo-demo-remote/${POM} 
         - PAYLOAD=`echo "{\"componentID\": \"gav:com.fasterxml.jackson.core:jackson-databind:2.11.0\"}"`
-        - curl -H "Content-Type:application/json" -u$int_ArtifactorySaaS_user:$int_ArtifactorySaaS_apikey -XPOST -d"$PAYLOAD" $int_ArtifactorySaaS_url/xray/api/v2/scanArtifact
+          #- curl -H "Content-Type:application/json" -u$int_ArtifactorySaaS_user:$int_ArtifactorySaaS_apikey -XPOST -d"$PAYLOAD" $int_ArtifactorySaaS_url/xray/api/v2/scanArtifact
 
 
      
