@@ -30,4 +30,4 @@ pipelines:
         - sleep 5
         - echo "{\"components_id\":[\"gav://com.fasterxml.jackson.core:jackson-databind:2.11.0\"]}" > f2.json
         - curl -H "Content-Type:application/json" -u$int_ArtifactorySaaS_user:$int_ArtifactorySaaS_apikey -XPOST --data @f2.json "https://soleng.jfrog.io/xray/api/v1/component/searchCvesByComponents"
-        - jfrog rt cp "/maven-wellsfargo-demo-remote/${POM}" maven-wellsfargo-demo-cleared-local/
+        - jfrog rt cp "/maven-wellsfargo-demo-remote-cache/${POM}" maven-wellsfargo-demo-cleared-local/
