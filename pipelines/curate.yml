@@ -23,8 +23,8 @@ pipelines:
           --interactive=false
         - echo "send_notification shimiNotify \"received request to clear $POM \""
         - jfrog rt curl /maven-wellsfargo-demo-remote/${POM} 
-        - PAYLOAD=`echo "{\"componentID\": \"gav:com.fasterxml.jackson.core:jackson-databind:2.11.0\"}"`
-          #- curl -H "Content-Type:application/json" -u$int_ArtifactorySaaS_user:$int_ArtifactorySaaS_apikey -XPOST -d"$PAYLOAD" $int_ArtifactorySaaS_url/xray/api/v2/scanArtifact
+        - PAYLOAD="\"{\"componentID\": \"gav:com.fasterxml.jackson.core:jackson-databind:2.11.0\"}\""
+        - curl -H "Content-Type:application/json" -u$int_ArtifactorySaaS_user:$int_ArtifactorySaaS_apikey -XPOST -d"$PAYLOAD" $int_ArtifactorySaaS_url/xray/api/v2/scanArtifact
 
 
      
