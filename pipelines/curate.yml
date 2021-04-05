@@ -24,4 +24,4 @@ pipelines:
         - echo "send_notification shimiNotify \"received request to clear $POM \""
         - jfrog rt curl /maven-wellsfargo-demo-remote/${POM} 
         - echo "{\"componentID\":\"gav://com.fasterxml.jackson.core:jackson-databind:2.11.0\"}" > f.json
-        - curl -H "Content-Type: application/json" -u$int_ArtifactorySaaS_user:$int_ArtifactorySaaS_apikey -XPOST --data "@f.json" "$int_ArtifactorySaaS_url/xray/api/v1/scanArtifact"
+        - curl -H "Content-Type:application/json" -u$int_ArtifactorySaaS_user:$int_ArtifactorySaaS_apikey -XPOST --data "@f.json" "$int_ArtifactorySaaS_url/xray/api/v1/scanArtifact"
