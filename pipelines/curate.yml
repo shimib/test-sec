@@ -1,0 +1,29 @@
+resources:
+  - name: artifact_info
+    type: IncomingWebhook
+    configuration:
+      webhookName: curate_artifact 
+pipelines:
+ - name: curate_artifact
+   steps:
+   - name: sendNotification
+     type: Bash
+     configuration:
+      inputResources:
+        - name: artifact_info
+          trigger: true
+      integrations:
+        - name: ArtifactorySaaS
+     execution:
+      onStart:
+        - POM=`echo $res_artifact_info_payload | jq -r -c '.name'` 
+        - >-
+          retry_command jfrog rt config --url $int_ArtifactorySaaS_url --user
+          $int_ArtifactorySaaS_user --apikey $int_ArtifactorySaaS_apikey
+          --interactive=false
+        - echo "send_notification shimiNotify \"received request to clear $POM \""
+        - jfrog rt curl /maven-wellsfargo-demo-remote/${POM} 
+        - curl -XPOST -d"{\\"componentID\\": \\"gav:com.fasterxml.jackson.core:jackson-databind:2.11.0\\"}" $int_ArtifactorySaaS_url/xray/api/v2/scanArtifact
+
+
+     
