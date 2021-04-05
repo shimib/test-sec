@@ -15,8 +15,8 @@ pipelines:
       integrations:
         - name: ArtifactorySaaS
      execution:
-      onStart:
-              - set -x
+             #      onStart:
+             #          - set -x
       onExecute:
         - POM=`echo $res_artifact_info_payload | jq -r -c '.name'` 
         - >-
